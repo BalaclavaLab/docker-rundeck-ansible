@@ -7,6 +7,7 @@ COPY ec2.ini /etc/ansible/
 RUN mkdir -p ${RDECK_BASE}/libext \
   && wget -O ${RDECK_BASE}/rundeck.jar http://dl.bintray.com/rundeck/rundeck-maven/rundeck-launcher-${RDECK_VERSION}.jar \
   && echo "${RDECK_SHA}  ${RDECK_BASE}/rundeck.jar" | sha1sum -c \
+  && wget -P ${RDECK_BASE}/libext https://github.com/rundeck-plugins/rundeck-ec2-nodes-plugin/releases/download/v1.5.2/rundeck-ec2-nodes-plugin-1.5.2.jar \
   && wget -P ${RDECK_BASE}/libext https://github.com/Batix/rundeck-ansible-plugin/releases/download/1.2.3/ansible-plugin-1.2.3.jar \
 
   # Without this kostylj Rundeck fails to start if db encryption is enabled.
