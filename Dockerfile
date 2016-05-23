@@ -12,8 +12,8 @@ RUN mkdir -p ${RDECK_BASE}/libext \
   && unzip -p ${RDECK_BASE}/rundeck.jar pkgs/webapp/WEB-INF/rundeck/plugins/rundeck-jasypt-encryption-plugin-${RDECK_VERSION}.jar > ${RDECK_BASE}/libext/rundeck-jasypt-encryption-plugin-${RDECK_VERSION}.jar \
 
   # Install Ansible
-  && apk add --no-cache py-pip python-dev musl-dev gcc libffi-dev openssl-dev git openssh-client\
-  && pip install boto paramiko PyYAML Jinja2 httplib2 six ansible
+  && apk add --no-cache py-pip python-dev musl-dev gcc libffi-dev openssl-dev git openssh-client \
+  && pip install boto paramiko PyYAML Jinja2 httplib2 six ansible awscli
 
 EXPOSE 4440
 
