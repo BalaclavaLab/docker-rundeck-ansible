@@ -3,7 +3,7 @@ FROM java:8-jre-alpine
 ENV RDECK_BASE=/opt/rundeck RDECK_VERSION=2.6.9 RDECK_SHA=8879caf623465902cb039921ce157d77e8e0592f
 ENV RDECK_EC2_PLUGIN=1.5.2 RDECK_ANSIBLE_PLUGIN=2.0.0 RDECK_SLACK_PLUGIN=v0.6.dev
 
-RUN apk add --no-cache py-pip python-dev musl-dev gcc libffi-dev openssl-dev git openssh-client ca-certificates wget \
+RUN apk add --no-cache py-pip python-dev musl-dev gcc libffi-dev openssl-dev git openssh-client ca-certificates wget linux-headers\
   && update-ca-certificates \
   && mkdir -p ${RDECK_BASE}/libext \
   && wget -O ${RDECK_BASE}/rundeck.jar http://dl.bintray.com/rundeck/rundeck-maven/rundeck-launcher-${RDECK_VERSION}.jar \
@@ -16,7 +16,7 @@ RUN apk add --no-cache py-pip python-dev musl-dev gcc libffi-dev openssl-dev git
   && unzip -p ${RDECK_BASE}/rundeck.jar pkgs/webapp/WEB-INF/rundeck/plugins/rundeck-jasypt-encryption-plugin-${RDECK_VERSION}.jar > ${RDECK_BASE}/libext/rundeck-jasypt-encryption-plugin-${RDECK_VERSION}.jar \
 
   # Install Ansible
-  && pip install boto paramiko PyYAML Jinja2 httplib2 six ansible awscli
+  && pip install boto paramiko PyYAML Jinja2 httplib2 six ansible awscli shade
 
 EXPOSE 4440
 
