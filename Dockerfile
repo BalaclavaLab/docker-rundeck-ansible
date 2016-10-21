@@ -1,7 +1,7 @@
 FROM java:8-jre-alpine
 
 ENV RDECK_BASE=/opt/rundeck RDECK_VERSION=2.6.9 RDECK_SHA=8879caf623465902cb039921ce157d77e8e0592f
-ENV RDECK_EC2_PLUGIN=1.5.2 RDECK_ANSIBLE_PLUGIN=2.0.0 RDECK_SLACK_PLUGIN=v0.6.dev
+ENV RDECK_EC2_PLUGIN=1.5.2 RDECK_ANSIBLE_PLUGIN=2.0.1 RDECK_SLACK_PLUGIN=v0.6.dev
 
 RUN apk add --no-cache py-pip python-dev musl-dev gcc libffi-dev openssl-dev git openssh-client ca-certificates wget linux-headers\
   && update-ca-certificates \
