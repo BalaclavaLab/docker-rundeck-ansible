@@ -3,7 +3,7 @@ FROM java:8-jre-alpine
 ENV RDECK_BASE=/opt/rundeck RDECK_VERSION=2.7.1 RDECK_SHA=0c75c648e3f7bdf8e3a822fb6986f688674ebd1a
 ENV RDECK_EC2_PLUGIN=1.5.3 RDECK_ANSIBLE_PLUGIN=2.0.2 RDECK_SLACK_PLUGIN=v0.6.dev
 
-RUN apk add --no-cache py-pip python-dev musl-dev gcc libffi-dev openssl-dev git openssh-client ca-certificates wget linux-headers\
+RUN apk add --no-cache py-pip python-dev musl-dev gcc libffi-dev openssl-dev git openssh-client ca-certificates wget linux-headers bind-tools \
   && update-ca-certificates \
   && mkdir -p ${RDECK_BASE}/libext \
   && wget -O ${RDECK_BASE}/rundeck.jar http://dl.bintray.com/rundeck/rundeck-maven/rundeck-launcher-${RDECK_VERSION}.jar \
