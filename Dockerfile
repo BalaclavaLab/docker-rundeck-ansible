@@ -1,13 +1,13 @@
 FROM java:8-jre-alpine
 
-ENV RDECK_BASE=/opt/rundeck RDECK_VERSION=2.8.2 RDECK_SHA=ec8f99fcb1724dc9fefa13b9ebffd9f34a140218
-ENV RDECK_EC2_PLUGIN=1.5.4 RDECK_ANSIBLE_PLUGIN=2.0.2 RDECK_SLACK_PLUGIN=v0.6.dev
+ENV RDECK_BASE=/opt/rundeck RDECK_VERSION=2.10.1 RDECK_SHA=c98b09835be9f5fcb8602e34125e8a3e5aade86a
+ENV RDECK_EC2_PLUGIN=1.5.5 RDECK_ANSIBLE_PLUGIN=2.2.2 RDECK_SLACK_PLUGIN=v0.6.dev
 
 RUN apk add --no-cache \
       py-pip python-dev musl-dev \
       gcc libffi-dev openssl-dev \
       wget linux-headers bind-tools \
-      git openssh-client ca-certificates \
+      git openssh-client ca-certificates make \
   && update-ca-certificates \
   && mkdir -p ${RDECK_BASE}/libext \
   && wget -O ${RDECK_BASE}/rundeck.jar \
@@ -21,9 +21,9 @@ RUN apk add --no-cache \
          https://github.com/higanworks/rundeck-slack-incoming-webhook-plugin/releases/download/${RDECK_SLACK_PLUGIN}/rundeck-slack-incoming-webhook-plugin-0.6.jar \
 
   # Without this kostylj Rundeck fails to start if db encryption is enabled.
-  && unzip -p ${RDECK_BASE}/rundeck.jar \
-              pkgs/webapp/WEB-INF/rundeck/plugins/rundeck-jasypt-encryption-plugin-${RDECK_VERSION}.jar > \
-              ${RDECK_BASE}/libext/rundeck-jasypt-encryption-plugin-${RDECK_VERSION}.jar \
+#  && unzip -p ${RDECK_BASE}/rundeck.jar \
+#              pkgs/webapp/WEB-INF/rundeck/plugins/rundeck-jasypt-encryption-plugin-${RDECK_VERSION}.jar > \
+#              ${RDECK_BASE}/libext/rundeck-jasypt-encryption-plugin-${RDECK_VERSION}.jar \
 
   # Install Ansible
   && pip install boto paramiko PyYAML Jinja2 httplib2 six ansible awscli shade
